@@ -53,9 +53,16 @@ public class MergeSort {
         Integer[] array = {5, 2, 9, 1, 3, 7, 4, 8, 6};
 
         System.out.println("Original Array: " + Arrays.toString(array));
-
+        long startTime = System.nanoTime(); // Start the timer
         mergesort(array, Comparator.naturalOrder());
 
         System.out.println("Merge Sorted Array: " + Arrays.toString(array));
+        long endTime = System.nanoTime(); // End the timer
+
+        long duration = (endTime - startTime) / 1_000; // Calculate duration in microseconds
+        long dur = (endTime - startTime) / 1_000_000; // Calculate duration in milliseconds
+
+        System.out.println("Time taken to sort: " + duration + " microseconds");
+        System.out.println("Time taken to sort: " + dur + " milliseconds");
     }
 }
