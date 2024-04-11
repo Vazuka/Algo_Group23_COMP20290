@@ -39,10 +39,17 @@ public class BucketSort {
         float[] array = {0.42f, 0.32f, 0.33f, 0.52f, 0.37f, 0.47f, 0.51f};
 
         System.out.println("Original Array: " + arrayToString(array));
-
+        long startTime = System.nanoTime(); // Start the timer
         bucketSort(array);
 
         System.out.println("Bucket Sorted Array: " + arrayToString(array));
+        long endTime = System.nanoTime(); // End the timer
+
+        long duration = (endTime - startTime) / 1_000; // Calculate duration in microseconds
+        long dur = (endTime - startTime) / 1_000_000; // Calculate duration in milliseconds
+
+        System.out.println("Time taken to sort: " + duration + " microseconds");
+        System.out.println("Time taken to sort: " + dur + " milliseconds");
     }
 
     // Utility method to convert array to string for printing
