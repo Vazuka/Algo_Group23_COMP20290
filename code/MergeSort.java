@@ -1,30 +1,32 @@
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Random;
 
 public class MergeSort {
 
-    public static <T extends Comparable<? super T>> void mergesort(final T[] array, final Comparator<T> comparator) {
+    public static void mergesort(final BigInteger[] array) {
         int length = array.length;
         if (length < 2) {
             return;
         }
 
-        final T[] left = Arrays.copyOfRange(array, 0, array.length / 2);
-        final T[] right = Arrays.copyOfRange(array, array.length / 2, array.length);
+        final BigInteger[] left = Arrays.copyOfRange(array, 0, array.length / 2);
+        final BigInteger[] right = Arrays.copyOfRange(array, array.length / 2, array.length);
 
-        mergesort(left, comparator);
-        mergesort(right, comparator);
+        mergesort(left);
+        mergesort(right);
 
         int leftIndex = 0;
         int rightIndex = 0;
         int index = 0;
 
         while (leftIndex < left.length && rightIndex < right.length) {
-            T leftItem = left[leftIndex];
-            T rightItem = right[rightIndex];
+            BigInteger leftItem = left[leftIndex];
+            BigInteger rightItem = right[rightIndex];
 
             // If left < right
-            if (comparator.compare(leftItem, rightItem) < 0) {
+            if (leftItem.compareTo(rightItem) < 0) {
                 array[index] = left[leftIndex];
                 leftIndex += 1;
             } else {
@@ -49,12 +51,17 @@ public class MergeSort {
     }
 
     public static void main(String[] args) {
-        // Example usage
-        Integer[] array = {5, 2, 9, 1, 3, 7, 4, 8, 6};
+        // Generate random BigInteger array
+        int size = 50;
+        BigInteger[] array = new BigInteger[size];
+        Random rand = new Random();
+        for (int i = 0; i < size; i++) {
+            array[i] = new BigInteger(10, rand);
+        }
 
         System.out.println("Original Array: " + Arrays.toString(array));
         long startTime = System.nanoTime(); // Start the timer
-        mergesort(array, Comparator.naturalOrder());
+        mergesort(array);
 
         System.out.println("Merge Sorted Array: " + Arrays.toString(array));
         long endTime = System.nanoTime(); // End the timer
